@@ -39,7 +39,7 @@ Search-ADAccount -AccountInactive -DateTime ((get-date).adddays(-90)) -UsersOnly
  sort -property LastLogonTimeStamp -Descending | 
  where {($_.Enabled -eq 'True') <#-and ($_.Description -like 'User Account - *')#>} | 
  select $cols |
- ConvertTo-Html -Head $header -Title "User Account Report" -PreContent "<H3>Inactive User Accounts (90) Days</H3>" -PostContent "Generated: $(Get-Date)" |
+ ConvertTo-Html -Head $header -Title "User Account Report" -PreContent "<H3>Inactive User Accounts (90) Days</H3> </br>Scope: *$targetOU" -PostContent "Generated: $(Get-Date)" |
  Out-File $filePath -Encoding ascii
 
  Invoke-Expression $filePath
