@@ -1,4 +1,23 @@
-﻿[CmdletBinding()]
+﻿<#
+.SYNOPSIS
+    Returns all inactive users in the domain.
+.DESCRIPTION
+    This script will evaluate enabled users in the specified OU, and if they 
+    have not logged in within defined period of time add them to an html report.
+.PARAMETER filepath
+    [optional] provides output path AND name of html file [default is 'c:\temp\inactive_users.htm']
+.PARAMETER targetOU
+    [optional] provides scope/filter [default is 'OU=Domain Users,DC=BWWB,DC=pri']
+.EXAMPLE
+    .\inactive-users.ps1
+.EXAMPLE
+    .\inactive-users.ps1 -filepath 'c:\temp\inactive_users.htm'
+.EXAMPLE
+    .\inactive-users.ps1 -targetOU 'OU=Information Technology,OU=Finance & Administration,OU=Domain Users,DC=BWWB,DC=pri'
+.NOTES
+    Written by: Chad White
+#>
+[CmdletBinding()]
 Param(
   [Parameter(Mandatory=$False,Position=1)]
    [string]$filePath = 'c:\temp\inactive_users.htm',	
@@ -39,7 +58,7 @@ Search-ADAccount -AccountInactive -DateTime ((get-date).adddays(-90)) -UsersOnly
  sort -property LastLogonTimeStamp -Descending | 
  where {($_.Enabled -eq 'True') <#-and ($_.Description -like 'User Account - *')#>} | 
  select $cols |
- ConvertTo-Html -Head $header -Title "User Account Report" -PreContent "<H3>Inactive User Accounts (90) Days</H3> </br>Scope: *$targetOU" -PostContent "Generated: $(Get-Date)" |
+ ConvertTo-Html -Head $header -Title "User Account Report" -PreContent "<H3>Inactive User Accounts (90) Days</H3></br>Scope: *$targetOU" -PostContent "Generated: $(Get-Date)" |
  Out-File $filePath -Encoding ascii
 
  Invoke-Expression $filePath
