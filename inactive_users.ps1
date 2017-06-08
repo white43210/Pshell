@@ -7,13 +7,13 @@
 .PARAMETER filepath
     [optional] provides output path AND name of html file [default is 'c:\temp\inactive_users.htm']
 .PARAMETER targetOU
-    [optional] provides scope/filter [default is 'OU=Domain Users,DC=BWWB,DC=pri']
+    [optional] provides scope/filter [default is 'OU=Users,DC=Acme,DC=com']
 .EXAMPLE
     .\inactive-users.ps1
 .EXAMPLE
     .\inactive-users.ps1 -filepath 'c:\temp\inactive_users.htm'
 .EXAMPLE
-    .\inactive-users.ps1 -targetOU 'OU=Information Technology,OU=Finance & Administration,OU=Domain Users,DC=BWWB,DC=pri'
+    .\inactive-users.ps1 -targetOU 'OU=IT,OU=Fargo,OU=Domain Users,DC=Acme,DC=com'
 .NOTES
     Written by: Chad White
 #>
@@ -23,7 +23,7 @@ Param(
    [string]$filePath = 'c:\temp\inactive_users.htm',	
 
    [Parameter(Mandatory=$False)]
-   [string]$targetOU = 'OU=Domain Users,DC=BWWB,DC=pri'
+   [string]$targetOU = 'OU=Users,DC=Acme,DC=com'
 )
 
 $header = @"
