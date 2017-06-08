@@ -4,7 +4,7 @@ Param(
    [string]$filePath = 'c:\temp\inactive_users.htm',	
 
    [Parameter(Mandatory=$False)]
-   [string]$targetOU = 'OU=Domain Users,DC=BWWB,DC=pri'
+   [string]$targetOU = 'OU=Users,DC=Acme,DC=com'
 )
 
 $header = @"
