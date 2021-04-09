@@ -1,2 +1,2 @@
-# powershell
-Powershell Scripts
+# Pshell
+Useful powershell scripts
